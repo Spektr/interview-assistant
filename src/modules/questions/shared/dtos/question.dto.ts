@@ -1,7 +1,7 @@
-import {Language} from "../enums/language";
-import {Tag} from "../enums/tag";
+import {Language} from "../../../../shared/enums/language";
+import {Tag} from "../../../../shared/enums/tag";
 
-export interface Question {
+export interface QuestionDto {
     text: string;
     answers: {
         score: number;

@@ -1,9 +1,9 @@
-import {Question} from "../../shared/interfaces/question";
-import {Language} from "../../shared/enums/language";
-import {Difficulty} from "../../shared/enums/difficulty";
-import {Tag} from "../../shared/enums/tag";
+import {QuestionDto} from "../../questions/shared/dtos/question.dto";
+import {Language} from "../../../shared/enums/language";
+import {Difficulty} from "../../../shared/enums/difficulty";
+import {Tag} from "../../../shared/enums/tag";
 
-const questions: Question[] = [{
+const questions: QuestionDto[] = [{
     text: 'я ебашу гусей',
     difficulty: Difficulty.Junior,
     links: ['www.learn.javascript.ru'],

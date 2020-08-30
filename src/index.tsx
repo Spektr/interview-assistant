@@ -1,14 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './containers/app/app';
+import App from './modules/app/containers/app/app';
 import * as serviceWorker from './serviceWorker';
+import {rootStoreInstance, RootStoreContext} from "./store/root.store";
+import {BrowserRouter, Switch, Route} from "react-router-dom";
+import {Welcome} from "./modules/app/containers/welcome/welcome";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+        <RootStoreContext.Provider value={rootStoreInstance}>
+            <Switch>
+                <Route path='/welcome' component={Welcome}/>
+                <Route path='/' component={App}/>
+            </Switch>
+        </RootStoreContext.Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
