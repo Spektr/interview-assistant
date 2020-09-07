@@ -8,8 +8,21 @@ import {QuestionDto} from "../shared/dtos/question.dto";
 export class QuestionStore {
     @observable list: Question[] = [];
     @observable lang: Language = Language.En;
+    @observable testableTags: Tag[] = [];
 
     constructor(private rootStore: RootStore) {
+    }
+
+    @action testTag(tag: Tag): void {
+        if (this.testableTags.includes(tag)) {
+            return;
+        }
+        this.testableTags.push(tag);
+    }
+
+    @action untestTag(tag: Tag): void {
+        const index = this.testableTags.indexOf(tag);
+        this.testableTags.splice(index, 1);
     }
 
     @action setLang(lang: Language): void {
@@ -24,15 +37,24 @@ export class QuestionStore {
         })
     }
 
-    @action loadTag(tag: Tag): void {
-        import(`../../db/${this.lang.toLowerCase()}/${tag.toLowerCase()}`)
-            .then((module) => {
-                this.unloadTag(tag);
-                this.populateList(module.default);
-            })
-            .catch((e) => {
-                console.log(e);
-            });
+    @action loadTags(): void {
+        const getPath = (tag: Tag) => `../../db/${this.lang.toLowerCase()}/${tag.toLowerCase()}`;
+
+        // this.testableTags
+        //     .forEach((tag) => {
+        //         import(`../../db/${this.lang.toLowerCase()}/${tag.toLowerCase()}`)
+        //             .then((item: any) => item.default)
+        //             .then((dtos: QuestionDto[]) => this.populateList(dtos))
+        //             .catch(console.log);
+        //     });
+
+        Promise
+            .all(this.testableTags
+                .map((tag) => import(`../../db/${this.lang.toLowerCase()}/${tag.toLowerCase()}`))
+            )
+            .then((modules: any) => modules.map((item: any) => item.default).flat())
+            .then((dtos: QuestionDto[]) => this.populateList(dtos))
+            .catch(console.log);
     }
 
     @action unloadTag(tag: Tag): void {

@@ -4,7 +4,7 @@ import {Difficulty} from "../../../shared/enums/difficulty";
 import {Tag} from "../../../shared/enums/tag";
 
 const questions: QuestionDto[] = [{
-    text: 'я ебашу гусей 3',
+    text: 'я ебашу гусей 1',
     difficulty: Difficulty.Junior,
     links: ['www.learn.javascript.ru'],
     tags: [Tag.UI],

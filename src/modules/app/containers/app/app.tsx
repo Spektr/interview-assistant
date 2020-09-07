@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import logo from '../../../../logo.svg';
 import './app.css';
 import {Tag} from "../../../../shared/enums/tag";
@@ -8,24 +8,20 @@ import {useObserver} from "mobx-react-lite";
 
 function App() {
     const store = useQuestionStore();
-    const [language, setLanguage] = useState(Language.En);
-    const [tag, setTag] = useState(Tag.UI);
 
     const load = () => {
-        store.setLang(language);
-        store.loadTag(tag);
+        store.loadTags();
     };
 
     const setLanguageHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value as Language;
-        setLanguage(value);
+        store.setLang(value);
     };
 
     const setTagHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value as Tag;
-        setTag(value);
+        store.testTag(value);
     };
-
 
     return useObserver(() => (
             <div className="App">
@@ -58,9 +54,7 @@ function App() {
                     </select>
 
                     <button onClick={load}>load</button>
-                    {JSON.stringify(store.list.map(item=> item.toDto))}
-                    {tag}
-                    {language}
+                    {JSON.stringify(store.list.map(item => item.toDto))}
                 </header>
             </div>
         )
