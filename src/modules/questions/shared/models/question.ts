@@ -1,9 +1,9 @@
-import {observable, computed} from "mobx";
-import {QuestionStore} from "../../store/question.store";
-import {QuestionDto} from "../dtos/question.dto";
-import {Language} from "../../../../shared/enums/language";
-import {Tag} from "../../../../shared/enums/tag";
-import {Difficulty} from "../../../../shared/enums/difficulty";
+import {observable, computed} from 'mobx';
+import {QuestionStore} from '../../store/question.store';
+import {QuestionDto} from '../dtos/question.dto';
+import {Language} from '../../../../shared/enums/language';
+import {Tag} from '../../../../shared/enums/tag';
+import {Difficulty} from '../../../../shared/enums/difficulty';
 
 export class Question {
     @observable correctAnswers: number[] = [];
@@ -16,7 +16,7 @@ export class Question {
             language: this.language,
             tags: this.tags,
             difficulty: this.difficulty,
-        }
+        };
     }
 
     text = '';

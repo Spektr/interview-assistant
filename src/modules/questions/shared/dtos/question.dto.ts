@@ -1,5 +1,5 @@
-import {Language} from "../../../../shared/enums/language";
-import {Tag} from "../../../../shared/enums/tag";
+import {Language} from '../../../../shared/enums/language';
+import {Tag} from '../../../../shared/enums/tag';
 
 export interface QuestionDto {
     text: string;

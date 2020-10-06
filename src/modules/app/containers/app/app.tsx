@@ -1,10 +1,11 @@
 import React, {ChangeEvent} from 'react';
 import logo from '../../../../logo.svg';
 import './app.css';
-import {Tag} from "../../../../shared/enums/tag";
-import {Language} from "../../../../shared/enums/language";
-import {useQuestionStore} from "../../../questions/store/question.selector";
-import {useObserver} from "mobx-react-lite";
+import {Tag} from '../../../../shared/enums/tag';
+import {Language} from '../../../../shared/enums/language';
+import {useQuestionStore} from '../../../questions/store/question.selector';
+import {useObserver} from 'mobx-react-lite';
+import {FormattedMessage} from 'react-intl';
 
 function App() {
     const store = useQuestionStore();
@@ -24,16 +25,16 @@ function App() {
     };
 
     return useObserver(() => (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
+            <div className='App'>
+                <header className='App-header'>
+                    <img src={logo} className='App-logo' alt='logo'/>
                     <p>
-                        Edit <code>src/App.tsx</code> and save to reload.
+                        <FormattedMessage id='app.titles.main'/>
                     </p>
 
                     <select
-                        name="lang"
-                        id="lang"
+                        name='lang'
+                        id='lang'
                         onChange={setLanguageHandler}
                         defaultValue={Language.En}
                     >
@@ -43,8 +44,8 @@ function App() {
                     </select>
 
                     <select
-                        name="tag"
-                        id="tag"
+                        name='tag'
+                        id='tag'
                         onChange={setTagHandler}
                         defaultValue={Tag.UI}
                     >

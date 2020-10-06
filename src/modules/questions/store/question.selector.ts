@@ -1,3 +1,3 @@
-import {useRootStore} from "../../../store/root.store";
+import {useRootStore} from '../../../store/root.store';
 
 export const useQuestionStore = () => useRootStore().questionStore;

@@ -1,8 +1,10 @@
 import React from 'react';
-import {QuestionStore} from "../modules/questions/store/question.store";
+import {QuestionStore} from '../modules/questions/store/question.store';
+import {IntlStore} from '../modules/intl/store/intl.store';
 
 export class RootStore {
     questionStore = new QuestionStore(this);
+    intlStore = new IntlStore(this);
 }
 
 export const rootStoreInstance = new RootStore();
