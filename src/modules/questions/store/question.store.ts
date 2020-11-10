@@ -6,6 +6,7 @@ import {Language} from '../../../shared/enums/language';
 import {QuestionDto} from '../shared/dtos/question.dto';
 
 export class QuestionStore {
+    @observable initialized = false;
     @observable list: Question[] = [];
     @observable lang: Language = Language.En;
     @observable testableTags: Tag[] = [];
@@ -13,19 +14,32 @@ export class QuestionStore {
     constructor(private rootStore: RootStore) {
     }
 
-    @action testTag(tag: Tag): void {
+    @action addTag(tag: Tag): void {
+        if (this.initialized) {
+            return;
+        }
+
         if (this.testableTags.includes(tag)) {
             return;
         }
+
         this.testableTags.push(tag);
     }
 
-    @action untestTag(tag: Tag): void {
+    @action removeTag(tag: Tag): void {
+        if (this.initialized) {
+            return
+        }
+
         const index = this.testableTags.indexOf(tag);
         this.testableTags.splice(index, 1);
     }
 
     @action setLang(lang: Language): void {
+        if (this.initialized) {
+            return
+        }
+
         this.lang = lang;
     }
 
@@ -44,6 +58,9 @@ export class QuestionStore {
             )
             .then((modules: any) => modules.map((item: any) => item.default).flat())
             .then((dtos: QuestionDto[]) => this.populateList(dtos))
+            .finally(() => {
+                this.initialized = true;
+            })
             .catch(console.log);
     }
 
